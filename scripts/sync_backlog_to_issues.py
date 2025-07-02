@@ -5,7 +5,7 @@ Use this manually during backlog grooming to push updates to GitHub.
 import os
 import requests
 
-REPO = 'your-username/your-repo'
+REPO = 'sspirial/copilot-workflow-template'
 TOKEN = os.getenv('GITHUB_TOKEN')
 BACKLOG_FILE = 'scrum/product_backlog.md'
 headers = {'Authorization': f'Bearer {TOKEN}', 'Accept': 'application/vnd.github+json'}
