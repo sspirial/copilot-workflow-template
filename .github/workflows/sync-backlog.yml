@@ -2,12 +2,17 @@ name: Sync Backlog Both Ways
 
 on:
   push:
-    paths:
-      - 'scrum/product_backlog.md'
   pull_request:
-    paths:
-      - 'scrum/product_backlog.md'
   workflow_dispatch:
+  issues:
+    types:
+      - opened
+      - edited
+      - deleted
+      - closed
+      - reopened
+      - labeled
+      - unlabeled
 
 jobs:
   sync-both:
