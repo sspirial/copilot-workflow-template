@@ -1,0 +1,36 @@
+name: Sync Backlog Both Ways
+
+on:
+  push:
+    paths:
+      - 'scrum/product_backlog.md'
+  pull_request:
+    paths:
+      - 'scrum/product_backlog.md'
+  workflow_dispatch:
+
+jobs:
+  sync-both:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: Install dependencies
+        run: pip install requests
+
+      - name: Sync Markdown → Issues
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          python scripts/sync_backlog_to_issues.py md-to-issues
+      - name: Sync Issues → Markdown
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          python scripts/sync_backlog_to_issues.py issues-to-md
